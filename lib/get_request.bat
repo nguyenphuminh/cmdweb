@@ -1,0 +1,1 @@
+call temp/%~1

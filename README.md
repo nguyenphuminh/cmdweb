@@ -82,14 +82,59 @@ In the handler, you can get the `name` parameter like this:
 echo %req.params.name%
 ```
 
+## Message formats
+
+Cmdweb supports message parsing based on specific formats and convert them into Batch variables to be used in a convenient way. You can provide a fourth optional argument to enable message parsing for that message format, for example:
+```bat
+call lib/listen "post" "/account" add_account "json"
+```
+
+Currently the only supported message format is JSON.
+
+### JSON messages
+
+JSON messages will be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like this:
+```json
+{
+    "name": "Bob",
+    "age": 19,
+    "profile": {
+        "isForeign": false,
+        "isRich": true
+    },
+    "jobs": [ "Baker", "Coder", "Investor" ]
+}
+```
+
+You can access each property like this:
+```bat
+echo %req.body["name"]%
+echo %req.body["age"]%
+echo %req.body["name"]%
+echo %req.body["profile"]["isForeign"]%
+echo %req.body["profile"]["isRich"]%
+echo %req.body["jobs"][0]%
+echo %req.body["jobs"][1]%
+echo %req.body["jobs"][2]%
+```
+
+The original JSON string is still available in `req.body`.
+
+### Character escaping
+
+Because characters like `& > < | ^ % \n` might cause troubles in our Batch scripts, they are stored into variables in an escaped format:
+* `& > < | ^` are escaped with `^^^`.
+* `%` is escaped by duplicating itself.
+* `\n` is replaced with `%NL%` - a built in macro of Cmdweb that can act as a new line.
+
 ## Examples
 
 You can move all files in `./examples` to the current directory, then type `app` in your console to start the server.
 
 ## Todos
 
-* Fix: Current way to pass information to requests is vulnerable to code injection attacks.
-* Plugins to parse JSON message bodies.
+* Add message parsing for more message formats.
+* Current way to pass information to requests is probably vulnerable to code injection attacks, I will try to figure out an universal way to solve this. I have some ideas, but they might be too slow.
 
 ## Copyrights and License
 

@@ -110,7 +110,6 @@ You can access each property like this:
 ```bat
 echo %req.body["name"]%
 echo %req.body["age"]%
-echo %req.body["name"]%
 echo %req.body["profile"]["isForeign"]%
 echo %req.body["profile"]["isRich"]%
 echo %req.body["jobs"][0]%

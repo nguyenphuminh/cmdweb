@@ -126,6 +126,13 @@ Because characters like `& > < | ^ % \n` might cause troubles in our Batch scrip
 * `%` is escaped by duplicating itself.
 * `\n` is replaced with `%NL%` - a built in macro of Cmdweb that can act as a new line.
 
+## SSL
+
+You can load your ssl certificate and host a public https server like this:
+```bat
+node lib/engine 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
+```
+
 ## Examples
 
 You can move all files in `./examples` to the current directory, then type `app` in your console to start the server.
@@ -134,7 +141,6 @@ You can move all files in `./examples` to the current directory, then type `app`
 
 Note: The list is not in order.
 * Add message parsing for more message formats.
-* Add https support.
 * Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
 
 ## Copyrights and License

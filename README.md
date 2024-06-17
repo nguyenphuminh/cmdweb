@@ -82,6 +82,15 @@ In the handler, you can get the `name` parameter like this:
 echo %req.params.name%
 ```
 
+### Query params
+
+Suppose you have an url like `http://bob.com/docs?page=30`.
+
+You can access the `page` parameter like this:
+```bat
+echo %req.query.params.name%
+```
+
 ## Message formats
 
 Cmdweb supports message parsing based on specific formats and convert them into Batch variables to be used in a convenient way. You can provide a fourth optional argument to enable message parsing for that message format, for example:

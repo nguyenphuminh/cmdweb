@@ -88,7 +88,7 @@ Suppose you have an url like `http://bob.com/docs?page=30`.
 
 You can access the `page` parameter like this:
 ```bat
-echo %req.query.params.name%
+echo %req.query.params.page%
 ```
 
 ## Message formats

@@ -149,6 +149,8 @@ You can move all files in `./examples` to the current directory, then type `app`
 ## Todos
 
 Note: The list is not in order.
+* Ability to serve static files.
+* Serve data through streams.
 * Add message parsing for more message formats.
 * Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
 

@@ -149,6 +149,7 @@ You can move all files in `./examples` to the current directory, then type `app`
 ## Todos
 
 Note: The list is not in order.
+* Caching.
 * Ability to serve static files.
 * Serve data through streams.
 * Add message parsing for more message formats.

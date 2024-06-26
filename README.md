@@ -149,11 +149,14 @@ You can move all files in `./examples` to the current directory, then type `app`
 ## Todos
 
 Note: The list is not in order.
-* Caching.
+* Some basic guards to prevent DDoS attacks.
 * Ability to serve static files.
-* Serve data through streams.
+* Serve/handle data through streams.
 * Add message parsing for more message formats.
+* The current response is stored in a Batch variable, which is limited to ~8100 characters, so I might use file I/O for this?
+* A better way to configure for each route.
 * Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
+* Caching.
 
 ## Copyrights and License
 

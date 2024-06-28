@@ -60,7 +60,7 @@ echo %req.headers["content-type"]%
 
 ### Response body
 
-And you can modify the response like this:
+You can modify the response like this:
 ```bat
 :: Response body
 set res.body=Hello, World!
@@ -69,6 +69,8 @@ set res.statusCode=200
 :: Header JSON string
 set res.headers={"content-type":"text/html"}
 ```
+
+Though, note that Batch commands are limited to 8190 characters, so minus the variable length you can have around ~8100 characters in a variable. I will soon add streaming to solve this problem.
 
 ### URL params
 
@@ -126,7 +128,15 @@ echo %req.body["jobs"][1]%
 echo %req.body["jobs"][2]%
 ```
 
-The original JSON string is still available in `req.body`.
+The original JSON string is still available in `req.body`. Like mentioned earlier, `req.body` can only store ~8100 characters, but each of these variables can store ~8100 characters as well. Which mean although a variable is limited, you can still have your message size be much larger if you design your message schema such that each property does not exceed 8100 characters.
+
+### Message size limit
+
+You can configure the maximum message size that each route will receive, default is 8100 bytes. Example:
+```bat
+:: This will limit the message size to 1048576 bytes, aka 1 megabyte
+call lib/listen "post" "/update/account/:name" update_account "json" 1048576
+```
 
 ### Character escaping
 
@@ -155,7 +165,9 @@ Note: The list is not in order.
 * Add message parsing for more message formats.
 * The current response is stored in a Batch variable, which is limited to ~8100 characters, so I might use file I/O for this?
 * A better way to configure for each route.
+* A bettter way to respond/write to headers.
 * Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
+* DB integration.
 * Caching.
 
 ## Copyrights and License

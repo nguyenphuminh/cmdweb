@@ -50,8 +50,10 @@ You can get the request body like this:
 ```bat
 :: This variable contains the request body
 echo %req.body%
-:: URL
+:: URL (contains query params)
 echo %req.url%
+:: Path (does not contain query params)
+echo %req.path%
 :: Remote address
 echo %req.address%
 :: Headers are stored in a dictionary-like format, example:

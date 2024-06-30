@@ -18,7 +18,7 @@ call lib/init
 :: Main code goes here
 
 :: Start the js runtime
-node lib/engine <port> "<hostname>"
+call lib/start <port> "<hostname>"
 ```
 
 ## Routing
@@ -151,7 +151,7 @@ Because characters like `& > < | ^ % \n` might cause troubles in our Batch scrip
 
 You can load your ssl certificate and host a public https server like this:
 ```bat
-node lib/engine 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
+call lib/start 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
 ```
 
 ## Examples

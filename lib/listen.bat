@@ -1,3 +1,5 @@
+:: Assign a handler and configurations for a route
+
 set limit=%~5
 if "%~5" == "" set limit=8100
 

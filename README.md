@@ -95,6 +95,13 @@ You can access the `page` parameter like this:
 echo %req.query.params.page%
 ```
 
+Cmdweb also comes with arrays support: suppose you have duplicated keys: `http://bob.com/docs?page=30&page=31&page=32`, page will be parsed as an array, an you can access `page` like this:
+```bat
+echo %req.query.params.page[0]%
+echo %req.query.params.page[1]%
+echo %req.query.params.page[2]%
+```
+
 ## Message formats
 
 Cmdweb supports message parsing based on specific formats and convert them into Batch variables to be used in a convenient way. You can provide a fourth optional argument to enable message parsing for that message format, for example:
@@ -102,7 +109,7 @@ Cmdweb supports message parsing based on specific formats and convert them into 
 call lib/listen "post" "/account" add_account "json"
 ```
 
-Currently the only supported message format is JSON.
+Currently the only supported message formats are JSON and url encoded form data.
 
 ### JSON messages
 
@@ -131,6 +138,27 @@ echo %req.body["jobs"][2]%
 ```
 
 The original JSON string is still available in `req.body`. Like mentioned earlier, `req.body` can only store ~8100 characters, but each of these variables can store ~8100 characters as well. Which mean although a variable is limited, you can still have your message size be much larger if you design your message schema such that each property does not exceed 8100 characters.
+
+### Url encoded form data
+
+Url encoded form data will also be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like this:
+```
+name=Bob+Ross&age=20&city=New+York
+```
+
+You can access each field like this:
+```bat
+echo %req.body["name"]%
+echo %req.body["age"]%
+echo %req.body["city"]%
+```
+
+And of course arrays are supported. For example, if the message is `name=Bob+Ross&name=Steve+Jobs&name=Dennis+Ritchie`, you can access each field like so:
+```bat
+echo %req.body["name"][0]%
+echo %req.body["name"][1]%
+echo %req.body["name"][2]%
+```
 
 ### Message size limit
 

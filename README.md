@@ -182,6 +182,21 @@ You can load your ssl certificate and host a public https server like this:
 call lib/start 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
 ```
 
+## Utilities
+
+### New lines
+
+Cmdweb comes with a macro called `NL` which is an equivalent to a new line. For example:
+```bat
+set req.body=Hello%NL%World
+```
+
+is equivalent to:
+```
+Hello
+World
+```
+
 ## Examples
 
 You can move all files in `./examples` to the current directory, then type `app` in your console to start the server.

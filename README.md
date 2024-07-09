@@ -88,14 +88,12 @@ echo %req.params.name%
 
 ### Query params
 
-Suppose you have an url like `http://bob.com/docs?page=30`.
-
-You can access the `page` parameter like this:
+With an url like `http://bob.com/docs?page=30`, you can access the `page` parameter like this:
 ```bat
 echo %req.query.params.page%
 ```
 
-Cmdweb also comes with arrays support: suppose you have duplicated keys: `http://bob.com/docs?page=30&page=31&page=32`, page will be parsed as an array, an you can access `page` like this:
+Cmdweb also comes with arrays support: In the case where you have duplicated keys: `http://bob.com/docs?page=30&page=31&page=32`, page will be parsed as an array, and you can access `page` like this:
 ```bat
 echo %req.query.params.page[0]%
 echo %req.query.params.page[1]%
@@ -137,7 +135,7 @@ echo %req.body["jobs"][1]%
 echo %req.body["jobs"][2]%
 ```
 
-The original JSON string is still available in `req.body`. Like mentioned earlier, `req.body` can only store ~8100 characters, but each of these variables can store ~8100 characters as well. Which mean although a variable is limited, you can still have your message size be much larger if you design your message schema such that each property does not exceed 8100 characters.
+The original JSON string is still available in `req.body`. Like mentioned earlier, `req.body` can only store ~8100 characters, but each of these variables can store ~8100 characters as well. Which means although a variable is limited, you can still have your message size be much larger if you design your message schema such that each property does not exceed 8100 characters.
 
 ### Url encoded form data
 
@@ -180,21 +178,6 @@ Because characters like `& > < | ^ % \n` might cause troubles in our Batch scrip
 You can load your ssl certificate and host a public https server like this:
 ```bat
 call lib/start 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
-```
-
-## Utilities
-
-### New lines
-
-Cmdweb comes with a macro called `NL` which is an equivalent to a new line. For example:
-```bat
-set req.body=Hello%NL%World
-```
-
-is equivalent to:
-```
-Hello
-World
 ```
 
 ## Examples

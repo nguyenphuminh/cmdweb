@@ -1,3 +1,0 @@
-get / handle_main
-get /hello handle_hello
-post /add/:name handle_add

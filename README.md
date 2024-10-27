@@ -21,6 +21,8 @@ call lib/init
 call lib/start <port> "<hostname>"
 ```
 
+If not specified, port will be 8000 and hostname will be `127.0.0.1`.
+
 ## Routing
 
 Routing can be done as easily as:
@@ -46,7 +48,7 @@ call lib/respond %~1
 
 ### Request body
 
-You can get the request body like this:
+You can get the request body using these variables:
 ```bat
 :: This variable contains the request body
 echo %req.body%
@@ -62,7 +64,7 @@ echo %req.headers["content-type"]%
 
 ### Response body
 
-You can modify the response like this:
+Here is how to create a response:
 ```bat
 :: Response body
 set res.body=Hello, World!
@@ -81,19 +83,19 @@ Suppose you have a route like this:
 call lib/listen "get" "/account/:name" get_account
 ```
 
-In the handler, you can get the `name` parameter like this:
+In the handler, you can get the `name` parameter:
 ```bat
 echo %req.params.name%
 ```
 
 ### Query params
 
-With an url like `http://bob.com/docs?page=30`, you can access the `page` parameter like this:
+With an url like `http://bob.com/docs?page=30`, you can access the `page` parameter like so:
 ```bat
 echo %req.query.params.page%
 ```
 
-Cmdweb also comes with arrays support: In the case where you have duplicated keys: `http://bob.com/docs?page=30&page=31&page=32`, page will be parsed as an array, and you can access `page` like this:
+Cmdweb also comes with arrays support: In the case where you have duplicated keys: `http://bob.com/docs?page=30&page=31&page=32`, page will be parsed as an array, and you can access `page` with variables following this format:
 ```bat
 echo %req.query.params.page[0]%
 echo %req.query.params.page[1]%
@@ -111,7 +113,7 @@ Currently the only supported message formats are JSON and url encoded form data.
 
 ### JSON messages
 
-JSON messages will be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like this:
+JSON messages will be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like:
 ```json
 {
     "name": "Bob",
@@ -139,12 +141,12 @@ The original JSON string is still available in `req.body`. Like mentioned earlie
 
 ### Url encoded form data
 
-Url encoded form data will also be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like this:
+Url encoded form data will also be parsed and stored into variables in a dictionary-like manner. For example, if we have a message payload like:
 ```
 name=Bob+Ross&age=20&city=New+York
 ```
 
-You can access each field like this:
+Here is how you can access each field:
 ```bat
 echo %req.body["name"]%
 echo %req.body["age"]%
@@ -175,10 +177,26 @@ Because characters like `& > < | ^ % \n` might cause troubles in our Batch scrip
 
 ## SSL
 
-You can load your ssl certificate and host a public https server like this:
+You can load your ssl certificate and host a public https server:
 ```bat
-call lib/start 443 "0.0.0.0" "./path/to/key" "./path/to/cert"
+call lib/start 443 "0.0.0.0" "./path/to/key" "./path/to/cert" "./path/to/ca"
 ```
+
+## Server configurations
+
+Currently there are not many options to configure so you can call `lib/start` and pass arguments directly like above, but there might be in the future. Therefore, you can also configure and start your server this way:
+
+```bat
+set server.port=443
+set server.hostname=0.0.0.0
+set server.ssl.keypath=./key.txt
+set server.ssl.crtpath=./crt.txt
+set server.ssl.capath=./ca.txt
+
+call lib/start
+```
+
+Note that the variables above have higher priority than the arguments, so for example `call lib/start 80` will still result in port 443 following the configuration above.
 
 ## Utilities
 
@@ -210,6 +228,7 @@ Note: The list is not in order.
 * A better way to configure for each route.
 * A bettter way to respond/write to headers.
 * Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
+* Comfortable ways to deal with CORS.
 * DB integration.
 * Caching.
 

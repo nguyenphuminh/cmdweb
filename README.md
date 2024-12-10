@@ -76,6 +76,15 @@ set res.headers={"content-type":"text/html"}
 
 Though, note that Batch commands are limited to 8190 characters, so minus the variable length you can have around ~8100 characters in a variable. I will soon add streaming to solve this problem.
 
+### Serving static files
+
+You can respond with a static file by providing a path in this variable:
+```bat
+set res.file=./path/to/file
+```
+
+Note that you must provide the content type by yourself in the headers if you need.
+
 ### URL params
 
 Suppose you have a route like this:
@@ -220,17 +229,14 @@ You can move all files in `./examples` to the current directory, then type `app`
 ## Todos
 
 Note: The list is not in order.
-* Some basic guards to prevent DDoS attacks.
-* Ability to serve static files.
 * Serve/handle data through streams.
 * Add message parsing for more message formats.
-* The current response is stored in a Batch variable, which is limited to ~8100 characters, so I might use file I/O for this?
 * A better way to configure for each route.
-* A bettter way to respond/write to headers.
-* Current way to pass information of requests to their handlers is probably vulnerable to code injection attacks. I will try to figure out an universal way to solve this. Already had some ideas, but they might be too slow.
+* A better way to respond/write to headers.
 * Comfortable ways to deal with CORS.
 * DB integration.
 * Caching.
+* Check for code injection possibilities.
 
 ## Copyrights and License
 

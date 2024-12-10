@@ -3,5 +3,5 @@
 if not defined res.statusCode set res.statusCode=200
 if not defined res.headers set res.headers={}
 
-echo {"statusCode":%res.statusCode%,"headers":%res.headers%}>temp/%~1.resh
+echo {"statusCode":%res.statusCode%,"headers":%res.headers%,"file":"%res.file%"}>temp/%~1.resh
 echo %res.body%>temp/%~1.resb

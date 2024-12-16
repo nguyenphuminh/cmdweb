@@ -2,9 +2,7 @@
 
 Cmdweb is a framework/runtime that allows backend web development in Batch. While there are much better languages, I sometimes give myself a little challenge to go back and write Batch scripts. A big problem that Batch has is the inability to do server-side work by itself, so I made this as a plugin for Batch to do so.
 
-While Batch is kind of tedious, I still try to make Cmdweb as easy to use as possible. You might notice there are parts of the code that can be made in a more optimized way, but I may intentionally do so to keep a clean coding experience.
-
-Disclaimer: Project is heavily in-dev and there are vulnerabilities listed below, do not use for anything serious! (And why are you using Batch for something serious anyway?).
+Disclaimer: Project is heavily in-dev and there might be vulnerabilities, do not use for anything serious!
 
 ## Getting started
 
@@ -74,7 +72,7 @@ set res.statusCode=200
 set res.headers={"content-type":"text/html"}
 ```
 
-Though, note that Batch commands are limited to 8190 characters, so minus the variable length you can have around ~8100 characters in a variable. I will soon add streaming to solve this problem.
+Though, note that Batch commands are limited to 8197 characters, so minus the variable length you can have around ~8100 characters in a variable. I will soon add streaming to solve this problem.
 
 ### Serving static files
 
@@ -83,7 +81,7 @@ You can respond with a static file by providing a path in this variable:
 set res.file=./path/to/file
 ```
 
-Note that you must provide the content type by yourself in the headers if you need.
+Note that you must provide the content type yourself in the headers if you need.
 
 ### URL params
 

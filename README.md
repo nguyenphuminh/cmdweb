@@ -240,4 +240,4 @@ Note: The list is not in order.
 
 Copyrights © 2024 Nguyen Phu Minh.
 
-This project is licensed under the GPL 3.0 License.
+This project is licensed under the Apache 2.0 License.
